@@ -10,12 +10,11 @@ app.use(cors());
 
 // * application router
 
-app.use("/api/v1/students",StudnetRoutes)
+app.use('/api/v1/students', StudnetRoutes);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('awolad');
 });
-
 
 // console.log(process.cwd())
 

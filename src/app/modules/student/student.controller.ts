@@ -17,8 +17,6 @@ const createStudent = async (req: Request, res: Response) => {
   }
 };
 
-
-
 const getAllStudents = async (req: Request, res: Response) => {
   try {
     const result = await StudentServicesController.getAllStudentsFromDB();
@@ -30,12 +28,26 @@ const getAllStudents = async (req: Request, res: Response) => {
   } catch (error) {
     console.log('Error in getAllStudents', error);
   }
-}
+};
 
-
-
+const getSingleStudent = async (req: Request, res: Response) => {
+  try {
+    //* Get student id from request params and its monogoDB id
+    const studentId = req.params.id;
+    const result =
+      await StudentServicesController.getSingleStudentFromDB(studentId);
+    res.status(200).json({
+      success: true,
+      message: 'Student fetched successfully !!',
+      data: result,
+    });
+  } catch (error) {
+    console.log('Error in getSingleStudent', error);
+  }
+};
 
 export const StudentControllers = {
   createStudent,
   getAllStudents,
+  getSingleStudent,
 };

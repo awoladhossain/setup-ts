@@ -1,4 +1,3 @@
-
 export type Gurdian = {
   fatherName: string;
   fatherOccupation: string;
@@ -34,5 +33,5 @@ export type Student = {
   guardian: Gurdian;
   localGuardian: LocalGuardian;
   profileImage?: string;
-  isActive: "active" | "blocked";
+  isActive: 'active' | 'blocked';
 };
