@@ -1,8 +1,21 @@
 import { Request, Response } from 'express';
 import { StudentServicesController } from './student.service';
+import Joi from 'joi';
 
 const createStudent = async (req: Request, res: Response) => {
   try {
+    // Joi validation
+
+    const JoiValidationSchema = Joi.object({
+      id: Joi.string().required(),
+      name: {
+        firstName: Joi.string().max(20).required(),
+        middlesName: Joi.string().max(20),
+        lastName: Joi.string().max(20).required(),
+      },
+      gender: Joi.string().required().valid(['Male', 'Female', 'Other']),
+    });
+
     const studentData = req.body;
 
     const result =
@@ -13,7 +26,11 @@ const createStudent = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    console.log('Error in createStudent', error);
+    res.status(500).json({
+      success: false,
+      message: 'Student failed to Create !!',
+      error: error,
+    });
   }
 };
 
